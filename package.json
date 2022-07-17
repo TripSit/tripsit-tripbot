@@ -1,0 +1,39 @@
+{
+  "name": "tripsit-tripbot",
+  "version": "1.8.5",
+  "description": "A bot for TripSit",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run go",
+    "dev": "npm run lint && npm run patch && npm run nodemon",
+    "nodemon": "nodemon --config ./nodemon.json",
+    "go": "ts-node src/discord/Bot.ts",
+    "lint": "eslint --ext ts .",
+    "patch": "npm version patch -git-tag-version false",
+    "minor": "npm version minor -git-tag-version false"
+  },
+  "author": "Moonbear",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/builders": "^0.15.0",
+    "@discordjs/rest": "^0.5.0",
+    "chalk": "^5.0.1",
+    "discord-api-types": "^0.36.1",
+    "discord.js": "^13.8.1",
+    "dotenv": "^16.0.1",
+    "eslint-import-resolver-typescript": "^3.2.6",
+    "winston": "^3.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}
