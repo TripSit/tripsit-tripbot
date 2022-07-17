@@ -1,4 +1,4 @@
 import {Command} from './command';
-import {Hello} from './commands/hello';
+import {Hello} from '../commands/hello';
 
 export const Commands: Command[] = [Hello];

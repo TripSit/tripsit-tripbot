@@ -6,8 +6,7 @@
       "files": true
     },
     "include": [
-        "./src/**/*.ts",
-        "environment.d.ts"
+        "./src/**/*.ts"
     ],
     "exclude": [
         "node_modules",

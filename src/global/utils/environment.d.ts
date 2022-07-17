@@ -1,5 +1,7 @@
 declare global {
+    // eslint-disable-next-line no-unused-vars
     namespace NodeJS {
+      // eslint-disable-next-line no-unused-vars
       interface ProcessEnv {
         GITHUB_AUTH_TOKEN?: string;
         NODE_ENV?: 'development' | 'production';

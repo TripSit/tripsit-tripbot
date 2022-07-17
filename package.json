@@ -1,6 +1,6 @@
 {
   "name": "tripsit-tripbot",
-  "version": "1.8.5",
+  "version": "1.0.15",
   "description": "A bot for TripSit",
   "main": "index.js",
   "scripts": {

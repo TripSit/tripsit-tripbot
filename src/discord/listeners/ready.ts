@@ -1,5 +1,5 @@
 import {Client} from 'discord.js';
-import {Commands} from '../commands';
+import {Commands} from '../utils/commands';
 const PREFIX = require('path').parse(__filename).name;
 const logger = require('../../global/utils/logger');
 
