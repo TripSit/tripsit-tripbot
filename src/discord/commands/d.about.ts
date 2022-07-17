@@ -1,7 +1,7 @@
 import {BaseCommandInteraction, Client} from 'discord.js';
 import {Command} from '../utils/command';
 const PREFIX = require('path').parse(__filename).name;
-const logger = require('../../../global/utils/logger');
+import logger from '../../global/utils/logger';
 const {about} = require('../../../global/utils/about');
 const template = require('../../utils/embed-template');
 

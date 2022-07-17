@@ -1,12 +1,9 @@
-/* eslint-disable no-unused-vars */
-
 // Bad things happen if this is not at the start.
 require('dotenv').config();
-const PREFIX = require('path').parse(__filename).name;
 import logger from './global/utils/logger';
-const {discordConnect} = require('./discord/discordAPI');
+import {discordConnect} from './discord/discordAPI';
 import {validateEnv} from './global/utils/validateEnv';
-
+const PREFIX = require('path').parse(__filename).name;
 
 // const {ircConnect} = require('./irc/ircAPI');
 // const {telegramConnect} = require('./telegram/telegramAPI');
@@ -15,7 +12,7 @@ import {validateEnv} from './global/utils/validateEnv';
 // const {runTimer} = require('./global/services/timerAPI');
 
 /**
-* Starts everything in the bot, which can be modular.
+* Starts everything in the bot.
 */
 async function start() {
   if (!validateEnv()) return;
