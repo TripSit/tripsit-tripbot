@@ -1,14 +1,20 @@
-import {BaseCommandInteraction, Client} from 'discord.js';
-import {Command} from '../utils/command';
+import {SlashCommandBuilder} from '@discordjs/builders';
+import {Command} from '../utils/commandDef';
 
 export const Hello: Command = {
-  name: 'hello',
-  description: 'Returns a greeting',
-  type: 'CHAT_INPUT',
-  run: async (client: Client, interaction: BaseCommandInteraction) => {
+  data: new SlashCommandBuilder()
+      .setName('hello')
+      .setDescription('Check in for the 100 Days of Code challenge.')
+      .addStringOption((option) =>
+        option
+            .setName('message')
+            .setDescription('test')
+            .setRequired(true),
+      ),
+  run: async (interaction) => {
     const content = 'Hello there!';
 
-    await interaction.followUp({
+    await interaction.reply({
       ephemeral: true,
       content,
     });

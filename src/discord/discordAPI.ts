@@ -1,8 +1,11 @@
 import {Client} from 'discord.js';
-import interactionCreate from './listeners/interactionCreate';
-import ready from './listeners/ready';
+// import interactionCreate from './events/onInteraction';
+// import ready from './events/ready';
 import env from '../global/utils/env.config';
 import logger from '../global/utils/logger';
+import {onReady} from './events/onReady';
+import {onInteraction} from './events/onInteraction';
+
 const PREFIX = require('path').parse(__filename).name;
 
 /**
@@ -14,9 +17,12 @@ export async function discordConnect(): Promise<void> {
     intents: [],
   });
 
-  ready(client);
-  interactionCreate(client);
+  client.on('ready', async () => await onReady(client));
+
+  client.on(
+      'interactionCreate',
+      async (interaction) => await onInteraction(interaction),
+  );
 
   await client.login(env.DISCORD_CLIENT_TOKEN);
 }
-
