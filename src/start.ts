@@ -3,8 +3,10 @@
 // Bad things happen if this is not at the start.
 require('dotenv').config();
 const PREFIX = require('path').parse(__filename).name;
-const logger = require('./global/utils/logger');
+import logger from './global/utils/logger';
 const {discordConnect} = require('./discord/discordAPI');
+import {validateEnv} from './global/utils/validateEnv';
+
 
 // const {ircConnect} = require('./irc/ircAPI');
 // const {telegramConnect} = require('./telegram/telegramAPI');
@@ -16,7 +18,8 @@ const {discordConnect} = require('./discord/discordAPI');
 * Starts everything in the bot, which can be modular.
 */
 async function start() {
-//   global.userDb = {};
+  if (!validateEnv()) return;
+  //   global.userDb = {};
   //   await firebaseConnect();
 
   await discordConnect();

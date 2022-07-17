@@ -1,70 +1,56 @@
-'use strict';
-
 // const winston = require('winston');
-const {
-  createLogger, format, transports, addColors,
-} = require('winston');
+import winston from 'winston';
+import {stripIndents} from 'common-tags';
 
-const logLevels = {
+const levels = {
   error: 0,
   warn: 1,
   info: 2,
-  modules: 3,
-  modwarn: 4,
-  modinfo: 5,
-  debug: 6,
+  http: 3,
+  debug: 4,
 };
 
-Object.defineProperty(global, '__stack', {
-  get() {
-    const orig = Error.prepareStackTrace;
-    Error.prepareStackTrace = function prepareStackTrace(_, stack) {
-      return stack;
-    };
-    const err = new Error();
-    Error.captureStackTrace(err, arguments.callee); // eslint-disable-line
-    const {stack} = err;
-    Error.prepareStackTrace = orig;
-    return stack;
-  },
-});
+const level = () => {
+  const env = process.env.NODE_ENV || 'development';
+  const isDevelopment = env === 'development';
+  return isDevelopment ? 'debug' : 'debug';
+};
 
-// Object.defineProperty(global, '__line', {
-//   get() {
-//     return __stack[1].getLineNumber(); // eslint-disable-line
-//   },
-// });
-
-// Object.defineProperty(global, '__function', {
-//   get() {
-//     return __stack[1].getFunctionName(); // eslint-disable-line
-//   },
-// });
-
-// const logger = winston.createLogger({
-module.exports = createLogger({
-  levels: logLevels,
-  transports: [new transports.Console({colorize: true, timestamp: true})],
-  format: format.combine(
-      format.colorize(),
-      format.padLevels({levels: logLevels}),
-      format.timestamp({format: 'MMM-DD-YYYY HH:mm:ss'}),
-      format.printf((info:any) => `${info.timestamp} ${info.level}:
-      ${info.message} ${info.stack ? `\n${info.stack}` : ''}`),
-      format.printf((info:any) => `${process.env.NODE_ENV !== 'production' ?
-      `${info.timestamp}` :
-      ''} ${info.level}:${info.message} ${info.stack ?
-         `\n${info.stack}` : ''}`),
-  ),
-  level: 'debug',
-});
-
-addColors({
+const colors = {
   error: 'red',
   warn: 'yellow',
   info: 'green',
-  modules: 'cyan',
-  modwarn: 'yellow',
-  modinfo: 'green',
-  debug: 'blue',
+  http: 'magenta',
+  debug: 'white',
+};
+
+winston.addColors(colors);
+
+const format = winston.format.combine(
+    winston.format.timestamp({format: 'YYYY-MM-DD HH:mm:ss:ms'}),
+    // winston.format.padLevels({levels: levels}),
+    winston.format.colorize({all: true}),
+    winston.format.printf(
+        (info) => stripIndents`\
+        ${process.env.NODE_ENV !== 'production' ? `${info.timestamp}` : ''}\
+        ${info.level}: ${info.message} ${info.stack ? `\n${info.stack}` : ''}`,
+    ),
+);
+
+const transports = [
+  new winston.transports.Console(),
+  new winston.transports.File({
+    filename: 'logs/error.log',
+    level: 'error',
+  }),
+  new winston.transports.File({filename: 'logs/all.log'}),
+];
+
+const Logger = winston.createLogger({
+  level: level(),
+  levels,
+  format,
+  transports,
 });
+
+export default Logger;

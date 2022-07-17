@@ -2,14 +2,14 @@ import {Client} from 'discord.js';
 import interactionCreate from './listeners/interactionCreate';
 import ready from './listeners/ready';
 import env from '../global/utils/env.config';
-const logger = require('../global/utils/logger');
+import logger from '../global/utils/logger';
 const PREFIX = require('path').parse(__filename).name;
 
 /**
  * Starts the discord bot
  */
 export async function discordConnect(): Promise<void> {
-  logger.info(`[${PREFIX}] Starting discord bot!`);
+  logger.debug(`[${PREFIX}] Starting discord bot!`);
   const client = new Client({
     intents: [],
   });

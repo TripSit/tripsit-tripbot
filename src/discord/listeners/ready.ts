@@ -1,7 +1,7 @@
 import {Client} from 'discord.js';
 import {Commands} from '../utils/commands';
+import logger from '../../global/utils/logger';
 const PREFIX = require('path').parse(__filename).name;
-const logger = require('../../global/utils/logger');
 
 export default (client: Client): void => {
   client.on('ready', async () => {
