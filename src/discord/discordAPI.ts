@@ -24,5 +24,5 @@ export async function discordConnect(): Promise<void> {
       async (interaction) => await onInteraction(interaction),
   );
 
-  await client.login(env.DISCORD_CLIENT_TOKEN);
+  client.login(env.DISCORD_CLIENT_TOKEN);
 }

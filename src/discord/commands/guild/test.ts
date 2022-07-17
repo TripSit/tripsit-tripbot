@@ -1,6 +1,6 @@
 import {SlashCommandBuilder} from '@discordjs/builders';
 import {MessageEmbed} from 'discord.js';
-import {Command} from '../utils/commandDef';
+import {Command} from '../../utils/commandDef';
 
 export const test: Command = {
   data: new SlashCommandBuilder()

@@ -1,8 +1,8 @@
 // Bad things happen if this is not at the start.
 require('dotenv').config();
-import logger from './global/utils/logger';
 import {discordConnect} from './discord/discordAPI';
 import {validateEnv} from './global/utils/validateEnv';
+import logger from './global/utils/logger';
 const PREFIX = require('path').parse(__filename).name;
 
 // const {ircConnect} = require('./irc/ircAPI');
@@ -15,6 +15,7 @@ const PREFIX = require('path').parse(__filename).name;
 * Starts everything in the bot.
 */
 async function start() {
+  logger.debug(`[${PREFIX}] Starting service!`);
   if (!validateEnv()) return;
   //   global.userDb = {};
   //   await firebaseConnect();

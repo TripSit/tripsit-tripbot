@@ -17,5 +17,6 @@ module.exports = {
   ],
   'rules': {
     'linebreak-style': ['error', 'unix'],
+    'max-len': ['error', {'code': 120}],
   },
 };

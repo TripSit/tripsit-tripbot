@@ -1,5 +1,13 @@
 import {Command} from './commandDef';
-import {Hello} from '../commands/hello';
-import {test} from '../commands/test';
+import {hello} from '../commands/global/hello';
+import {test} from '../commands/guild/test';
+import logger from '../../global/utils/logger';
+const PREFIX = require('path').parse(__filename).name;
 
-export const CommandList: Command[] = [Hello, test];
+logger.debug(`[${PREFIX}] start!`);
+
+export const GuildCommandList: Command[] = [test];
+
+export const GlobalCommandList: Command[] = [hello];
+
+export const CommandList: Command[] = [hello, test];

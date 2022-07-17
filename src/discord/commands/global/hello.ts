@@ -1,7 +1,7 @@
 import {SlashCommandBuilder} from '@discordjs/builders';
-import {Command} from '../utils/commandDef';
+import {Command} from '../../utils/commandDef';
 
-export const Hello: Command = {
+export const hello: Command = {
   data: new SlashCommandBuilder()
       .setName('hello')
       .setDescription('Check in for the 100 Days of Code challenge.')
